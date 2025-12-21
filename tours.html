@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДУРКА ТУР 26 ГОД</title>
+    <link rel="stylesheet" href="tours_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Добавьте этот блок ПЕРВЫМ элементом внутри <body> -->
+<div id="intro-overlay" class="intro-active">
+    <div class="intro-container">
+        <video id="intro-video" autoplay muted playsinline 
+       style="width: 100%; height: 100%; object-fit: cover;">
+            <source src="интро.mp4" type="video/mp4">
+            <source src="intro.webm" type="video/webm">
+        </video>
+        <button id="skip-btn" class="skip-btn" style="display: block;">
+    Пропустить
+</button>
+    </div>
+</div>
+
+<!-- Весь остальной контент сайта -->
+<div id="site-content" class="content-hidden">
+    <!-- ваш существующий контент -->
+</div>
+    <div class="container">
+        <header>
+            <div class="logo">УРОД ТУР</div>
+            <div class="subtitle">ХАЙ, мы группа тапки, ты нас знаешь, в 2025 году у нас был тур, но мы решили не останавливаться, и в 26 ебашим новые города, приходите</div>
+        </header>
+        
+        <main class="tours-container">
+            <div class="tour-list">
+                <!-- Список туров -->
+                <div class="tour-item">
+                    <span class="city">CHEBOKSARI</span>
+                    <span class="date">1.06</span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">URUPINSK</span>
+                    <span class="date">VCHERA</span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">ROMA DOLINA</span>
+                    <span class="date">2.06</span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">Vsemayki</span>
+                    <span class="date">ZAVTRA</span>
+                </div>
+              <div class="tour-item highlight">
+    <span class="city">TAGANROJ</span>
+    <span class="date">22.06</span>
+</div>
+                <div class="tour-item">
+                    <span class="city">MOS.PR</span>
+                    <span class="date">16.08</span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">MASHMET</span>
+                    <span class="date">58/8</span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">SOMOVO</span>
+                    <span class="date">NAXIU</span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">SISKI</span>
+                    <span class="date">XD</span>
+                </div>
+               <div class="tour-item highlight">
+    <span class="city">SURGUT</span>
+    <span class="date">2.07</span>
+</div>
+                <div class="tour-item">
+                    <span class="city">PIZDA</span>
+                    <span class="date">4.07</span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">OK</span>
+                    <span class="date"></span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">NEKEL</span>
+                    <span class="date"></span>
+                </div>
+                <div class="tour-item">
+                    <span class="city">ISAAC</span>
+                    <span class="date">5.07</span>
+                </div>
+            </div>
+            
+            <div class="buy-section">
+                <div class="selected-tour">
+                    <h3 id="selectedCity">ВЫБЕРИ ГОРОД</h3>
+                    <p id="selectedDate">-</p>
+                </div>
+                
+                <div class="ticket-options">
+                    <h4>КАТЕГОРИЯ БИЛЕТА:</h4>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="ticket" value="танцпол">
+                            <span class="checkmark"></span>
+                            <span class="option-text">ТАНЦПОЛ питьсот рублёффф  </span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="ticket" value="фан">
+                            <span class="checkmark"></span>
+                            <span class="option-text">ФАН как танцол но больше XD</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="ticket" value="мит н григ">
+                            <span class="checkmark"></span>
+                            <span class="option-text">МИТ Н ГРИГ(погугли что это школьник) принимаем только СЕКСУЛЬНЫХ девочек 60+</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button class="buy-btn" onclick="buyTicket()">ОПЛАТИТЬ БИЛЕТ</button>
+                
+                <div class="note">
+                    <p>⚠️ Билеты не возвращаются и не обмениваются</p>
+                    <p>⚠️ Оплата = согласие с тем, что ты долбаёб</p>
+                </div>
+            </div>
+        </main>
+        
+        <div id="messageModal" class="modal">
+            <div class="modal-content">
+                <h2 id="modalTitle">СООБЩЕНИЕ</h2>
+                <p id="modalMessage"></p>
+                <button class="close-btn" onclick="closeModal()">ОК</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 20255 УРОД ТУР | ТУРЫ ВЕЗДЕ</p>
+            <p>МЫ УРОДЫ!!!!!</p>
+        </footer>
+    </div>
+
+    <script src="tours_script.js"></script>
+</body>
+</html>
