@@ -488,3 +488,43 @@ footer {
     background: rgba(255, 0, 0, 0.1) !important;
     border-bottom: 2px solid #ff0000 !important;
 }
+
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.option.soldout:hover {
+    transform: none !important;
+    background: #333 !important;
+}
+
+/* SOLD OUT стиль для Somovo */
+.option.soldout {
+    background: #333 !important;
+    border-color: #ff0000 !important;
+    opacity: 0.7;
+    position: relative;
+}
+
+.option.soldout::after {
+    content: "🔴 SOLD OUT";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ff0000;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}

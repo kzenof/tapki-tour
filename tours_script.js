@@ -71,7 +71,7 @@ const tours = [
     { city: "TAGANROJ", date: "22.06" },
     { city: "MOS.PR", date: "16.08" },
     { city: "MASHMET", date: "58/8" },
-    { city: "SOMOVO", date: "NAXIU" },
+    { city: "SOMOVO", date: "NAXIU", soldout: ["танцпол", "фан"] },
     { city: "SISKI", date: "XD" },
     { city: "SURGUT", date: "2.07" },
     { city: "PIZDA", date: "4.07" },
@@ -79,6 +79,7 @@ const tours = [
     { city: "NEKEL", date: "" },
     { city: "ISAAC", date: "5.07" }
 ];
+
 
 // Текущий выбранный тур
 let selectedTour = null;
@@ -88,22 +89,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Создаем обработчики для каждого тура
     const tourItems = document.querySelectorAll('.tour-item');
     
-    tourItems.forEach((item, index) => {
-        item.addEventListener('click', function() {
-            // Убираем выделение у всех
-            tourItems.forEach(i => i.classList.remove('selected'));
-            
-            // Выделяем текущий
-            this.classList.add('selected');
-            
-            // Запоминаем выбранный тур
-            selectedTour = tours[index];
-            
-            // Показываем выбранный тур справа
-            document.getElementById('selectedCity').textContent = selectedTour.city;
-            document.getElementById('selectedDate').textContent = selectedTour.date;
-        });
+ tourItems.forEach((item, index) => {
+    item.addEventListener('click', function() {
+        // Убираем выделение у всех
+        tourItems.forEach(i => i.classList.remove('selected'));
+        
+        // Выделяем текущий
+        this.classList.add('selected');
+        
+        // Обновляем выбранный тур
+        selectedTour = tours[index];
+        
+        // Показываем выбранный тур справа
+        document.getElementById('selectedCity').textContent = selectedTour.city;
+        document.getElementById('selectedDate').textContent = selectedTour.date;
+        
+             // *** SOLD OUT НАДПИСИ ***
+        updateTicketStatuses();
+        
+        // Сбрасываем выбор билета
+        document.querySelectorAll('input[name="ticket"]').forEach(radio => radio.checked = false);
     });
+});
+
+
     
     // Выбираем первый тур по умолчанию
     if (tourItems.length > 0) {
@@ -141,14 +150,27 @@ function buyTicket() {
         modal.style.display = 'flex';
         return;
     }
+
+    // *** НОВОЕ: УВЕДОМЛЕНИЕ ПРИ КЛИКЕ НА SOLD OUT SOMOVO ***
+    if (selectedTour.city === "SOMOVO" && ["танцпол", "фан"].includes(selectedTicket.value)) {
+        const modal = document.getElementById('messageModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        
+        modalTitle.textContent = "УЁБОК, СОЛДАУТ";
+        modalMessage.textContent = "СОЛД-АУТ АЛО! ТОЛЬКО МИТ Н ГРИГ ДОСТУПЕН";
+        modal.style.display = 'flex';
+        return; // БЛОКИРУЕМ КУПЛЮ
+    }
     
-    // Если всё выбрано - сразу открываем сайт оплаты в новом окне
-    // Замените URL на реальный сайт оплаты
+    // Если всё ок - открываем оплату
     window.open("https://www.donationalerts.com/r/tapki_tour", "_blank");
     
     // Сбрасываем выбор билета
     selectedTicket.checked = false;
 }
+
+
 
 // Закрытие модального окна
 function closeModal() {
@@ -162,3 +184,37 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+// Показываем SOLD OUT надписи для Somovo
+// Показываем SOLD OUT надписи для Somovo
+function updateTicketStatuses() {
+    const options = document.querySelectorAll('.option');
+    
+    options.forEach(option => {
+        const input = option.querySelector('input[type="radio"]');
+        const optionText = option.querySelector('.option-text');
+        const ticketType = input.value;
+        
+        // *** СБРАСЫВАЕМ ВСЕ SOLD OUT ПЕРВЫМ ДЕЛОМ ***
+        option.classList.remove('soldout');
+        
+        // Восстанавливаем ОРИГИНАЛЬНЫЕ названия для ВСЕХ
+        if (ticketType === "танцпол") {
+            optionText.innerHTML = "ТАНЦПОЛ питьсот рублёффф";  // ОРИГИНАЛ
+        } else if (ticketType === "фан") {
+            optionText.innerHTML = "ФАН как танцол но больше XD";  // ОРИГИНАЛ
+        } else if (ticketType === "мит н григ") {
+            optionText.innerHTML = "МИТ Н ГРИГ(погугли что это школьник) принимаем только СЕКСУЛЬНЫХ девочек 60+";  // ОРИГИНАЛ
+        }
+        
+        // *** SOLD OUT СТИЛЬ ТОЛЬКО для танцпол/фан в SOMOVO ***
+        if (selectedTour && selectedTour.city === "SOMOVO" && ["танцпол", "фан"].includes(ticketType)) {
+            option.classList.add('soldout');
+            // *** НАДПИСЬ SOLD OUT ОСТАЕТСЯ, НО НАЗВАНИЕ ОРИГИНАЛЬНОЕ ***
+        }
+    });
+}
+
+
+
+
+
