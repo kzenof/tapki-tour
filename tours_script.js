@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Данные о турах
 const tours = [
     { city: "CHEBOKSARI", date: "1.06" },
-    { city: "URUPINSK", date: "VCHEra" },
+    { city: "URUPINSK", date: "VCHERA" },
     { city: "ROMA DOLINA", date: "2.06" },
     { city: "Vsemayki", date: "ZAVTRA" },
     { city: "TAGANROJ", date: "22.06" },
@@ -213,6 +213,7 @@ function updateTicketStatuses() {
         }
     });
 }
+
 
 
 
